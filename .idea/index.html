@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Markdown Links</title>
+</head>
+<body>
+<h1>Markdown Files</h1>
+<ul id="links"></ul>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const linksList = document.getElementById('links');
+        for (let i = 1; i <= 100; i++) {
+            const filename = i + '.md';
+            fetch(filename, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        const li = document.createElement('li');
+                        const a = document.createElement('a');
+                        a.href = filename;
+                        a.textContent = filename;
+                        li.appendChild(a);
+                        linksList.appendChild(li);
+                    }
+                })
+                .catch(() => {}); // Do nothing on error
+        }
+    });
+</script>
+</body>
+</html>
